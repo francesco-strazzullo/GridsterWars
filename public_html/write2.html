@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>GridsterWars</title>
+        <script src="lib/jquery-2.0.3.js"></script>
+        <script src="lib/jquery.gridster.js"></script>
+         <script src="lib/underscore.js"></script>
+        <script src="lib/scripts.js"></script>
+        <link href="css/jquery.gridster.css" rel="stylesheet" media="screen">
+        <link href="css/styles.css" rel="stylesheet" media="screen">
+        <script>
+           
+           window.GridsterWars.serializeCrewMember = function($w, wgd){
+               var crewMember = _.findWhere(window.GridsterWars.crewMembers, {id: $w.data('crew-id')}); 
+               crewMember.position = [wgd.row,wgd.col];
+               return crewMember;
+            };
+
+           jQuery(document).ready((function() {
+                window.GridsterWars.gridster = jQuery("#myGrid ul").gridster({
+                    widget_base_dimensions: [100, 100],
+                    serialize_params: window.GridsterWars.serializeCrewMember
+                }).data('gridster');
+                
+                //Drag and Drop must be enabled
+                //window.GridsterWars.gridster.disable();
+                
+                window.GridsterWars.loadData();
+            }));
+
+
+        </script>
+    </head>
+    <body>
+        <div class="container">
+            <div class="logo">
+                <a title="By User:KAMiKAZOW (Transferred from en.wikipedia to Commons.) [Public domain], via Wikimedia Commons" href="http://commons.wikimedia.org/wiki/File%3AStar_Wars_Logo.svg">
+                    <img 
+                        width="300" 
+                        alt="Star Wars Logo" 
+                        src="//upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Star_Wars_Logo.svg/512px-Star_Wars_Logo.svg.png"/>
+                </a>
+            </div>
+            <button onclick="window.GridsterWars.dumpData()">Dump Data</button>
+            <div id="myGrid" class="gridster">
+                <ul>
+                </ul>
+            </div>
+        </div>
+    </body>
+</html>

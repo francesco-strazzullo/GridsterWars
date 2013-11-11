@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>GridsterWars</title>
+        <script src="lib/jquery-2.0.3.js"></script>
+        <script src="lib/jquery.gridster.js"></script>
+        <script src="lib/underscore.js"></script>
+        <link href="css/jquery.gridster.css" rel="stylesheet" media="screen">
+        <link href="css/styles.css" rel="stylesheet" media="screen">
+        <script>
+
+            window.GridsterWars = {};
+
+            window.GridsterWars.crewMembers = [];
+
+            window.GridsterWars.constants = {
+                roleSizes: {
+                    director: 3,
+                    actor: 2
+                },
+                jsonUrl: 'lib/data.json'
+            };
+
+            window.GridsterWars.createCrewElement = function(crewMember) {
+
+                var elementHtmlContent = "<li class='crew-block'";
+
+                //add data attributes
+                elementHtmlContent += " data-crew-id='" + crewMember.id + "' >";
+
+                elementHtmlContent += crewMember.name + "<br/>--<br/>";
+                if ('character' in crewMember.role) {
+                    elementHtmlContent += "<b>" + crewMember.role.name + ":</b> <i>" + crewMember.role.character + "</i>";
+                } else {
+                    elementHtmlContent += "<b>" + crewMember.role.name + "</b>";
+                }
+
+                elementHtmlContent + "</li>";
+
+                return elementHtmlContent;
+
+            };
+
+            window.GridsterWars.loadData = function() {
+                //Cleanup
+                window.GridsterWars.gridster.remove_all_widgets();
+
+                executeLoadData = function(data) {
+                    var i = 0;
+                    for (i = 0; i < data.length; i++) {
+                        var crewMember = data[i];
+                        var crewMemberElement = window.GridsterWars.createCrewElement(crewMember);
+                        var size = window.GridsterWars.constants.roleSizes[crewMember.role.name.toLowerCase()] || 1;
+                        var row = crewMember.position[0];
+                        var col = crewMember.position[1];
+
+                        window.GridsterWars.gridster.add_widget(crewMemberElement, size, size, col, row);
+                    }
+                };
+
+                if (_.size(window.GridsterWars.crewMembers) === 0) {
+                    jQuery.getJSON(window.GridsterWars.constants.jsonUrl, function(data) {
+                        window.GridsterWars.crewMembers = data;
+                        executeLoadData(data);
+                    });
+                } else {
+                    executeLoadData(window.GridsterWars.crewMembers);
+                }
+            };
+
+            jQuery(document).ready((function() {
+                window.GridsterWars.gridster = jQuery("#myGrid ul").gridster({
+                    widget_base_dimensions: [100, 100]
+                }).data('gridster');
+
+                window.GridsterWars.gridster.disable();
+
+                window.GridsterWars.loadData();
+            }));
+
+
+        </script>
+    </head>
+    <body>
+        <div class="container">
+            <div class="logo">
+                <a title="By User:KAMiKAZOW (Transferred from en.wikipedia to Commons.) [Public domain], via Wikimedia Commons" href="http://commons.wikimedia.org/wiki/File%3AStar_Wars_Logo.svg">
+                    <img 
+                        width="300" 
+                        alt="Star Wars Logo" 
+                        src="//upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Star_Wars_Logo.svg/512px-Star_Wars_Logo.svg.png"/>
+                </a>
+            </div>
+            <div id="myGrid" class="gridster">
+                <ul>
+                </ul>
+            </div>
+        </div>
+    </body>
+</html>

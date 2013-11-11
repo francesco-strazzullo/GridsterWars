@@ -1,0 +1,22 @@
+body{
+    background-color: black;
+}
+
+ul, li {
+    list-style-type: none;
+}
+
+.container{
+    width: 80%;
+    margin: 0 auto;
+}
+
+.logo{
+    width: 300px;
+    margin: 0 auto;
+}
+
+.crew-block{
+    background-color: white;
+    text-align: center;
+}

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>GridsterWars</title>
+        <script src="lib/jquery-2.0.3.js"></script>
+        <script src="lib/jquery.gridster.js"></script>
+         <script src="lib/underscore.js"></script>
+        <link href="css/jquery.gridster.css" rel="stylesheet" media="screen">
+        <script>
+            
+            window.GridsterWars = {};
+            
+            jQuery(document).ready((function() {
+                window.GridsterWars.gridster = jQuery("#myGrid ul").gridster({
+                    widget_base_dimensions: [100, 100]
+                }).data('gridster');
+
+                window.GridsterWars.gridster.disable();
+            }));
+
+
+        </script>
+        <style>
+
+            body{
+                background-color: black;
+            }
+
+            ul, li {
+                list-style-type: none;
+            }
+
+            .container{
+                width: 80%;
+                margin: 0 auto;
+            }
+
+            .logo{
+                width: 300px;
+                margin: 0 auto;
+            }
+
+            .crew-block{
+                background-color: white;
+                text-align: center;
+            }
+
+
+        </style>   
+    </head>
+    <body>
+        <div class="container">
+            <div class="logo">
+                <a title="By User:KAMiKAZOW (Transferred from en.wikipedia to Commons.) [Public domain], via Wikimedia Commons" href="http://commons.wikimedia.org/wiki/File%3AStar_Wars_Logo.svg">
+                    <img 
+                        width="300" 
+                        alt="Star Wars Logo" 
+                        src="//upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Star_Wars_Logo.svg/512px-Star_Wars_Logo.svg.png"/>
+                </a>
+            </div>
+            <div id="myGrid" class="gridster">
+                <ul>
+                    <li 
+                        data-row="1" 
+                        data-col="1" 
+                        data-sizex="3" 
+                        data-sizey="3"
+                        class="crew-block">
+                        George Lucas
+                        <br/>
+                        --
+                        <br/>
+                        <b>Director</b>
+                    </li>
+                    <li 
+                        data-row="3" 
+                        data-col="4" 
+                        data-sizex="2" 
+                        data-sizey="2"
+                        class="crew-block">
+                        Mark Hamill
+                        <br/>
+                        --
+                        <br/>
+                        <b>Actor:</b> <i>Luke Skywalker</i>
+                    </li>
+                    <li 
+                        data-row="1" 
+                        data-col="5" 
+                        data-sizex="2" 
+                        data-sizey="2"
+                        class="crew-block">
+                        Carrie Fisher
+                        <br/>
+                        --
+                        <br/>
+                        <b>Actor:</b> <i>Princess Leila</i>
+                    </li>
+                    <li 
+                        data-row="1" 
+                        data-col="7" 
+                        data-sizex="2" 
+                        data-sizey="2"
+                        class="crew-block">
+                        Harrison Ford
+                        <br/>
+                        --
+                        <br/>
+                        <b>Actor:</b> <i>Ian Solo</i>
+                    </li>
+                    <li 
+                        data-row="4" 
+                        data-col="1" 
+                        data-sizex="1" 
+                        data-sizey="1"
+                        class="crew-block">
+                        John Williams
+                        <br/>
+                        --
+                        <br/>
+                        <b>Music composer</b>
+                    </li>
+                    <li 
+                        data-row="1" 
+                        data-col="4" 
+                        data-sizex="1" 
+                        data-sizey="1"
+                        class="crew-block">
+                        Ben Burtt
+                        <br/>
+                        --
+                        <br/>
+                        <b>Sound designer</b>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </body>
+</html>
